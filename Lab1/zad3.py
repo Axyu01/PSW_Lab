@@ -45,9 +45,12 @@ ax[1][2].imshow(y2q,cmap = 'magma')
 ax[1][2].set_title('min: %.3f, max: %.3f' % (value_min_q, value_max_q))
 
 
-#zad3
+#ZAD 3
+LOC = 0.5
+SCALE = 1
+n = [50,1000]
 #noise n = 1
-noise = np.random.normal(size = (SPACE,SPACE))
+noise = np.random.normal(loc = LOC,scale = SCALE,size = (SPACE,SPACE))
 y2n = noise + y2
 value_min_n = np.min(y2n)
 value_max_n = np.max(y2n)
@@ -55,24 +58,24 @@ ax[2][0].imshow(y2n,cmap = 'magma')
 ax[2][0].set_title('n = 1')
 
 #noise n = 50
-imgArray = np.zeros(shape = (SPACE,SPACE,50))
-for img in range(0,50):
-    noise = np.random.normal(size = (SPACE,SPACE))
+imgArray = np.zeros(shape = (SPACE,SPACE,n[0]))
+for img in range(0,n[0]):
+    noise = np.random.normal(loc = LOC,scale = SCALE,size = (SPACE,SPACE))
     y2n = noise + y2
     imgArray[:,:,img] = y2n
 imgArray = imgArray.mean(axis = 2)
 ax[2][1].imshow(imgArray,cmap = 'magma')
-ax[2][1].set_title('n = 50')
+ax[2][1].set_title(f'n = {n[0]}')
 
 #noise n = 1000
-imgArray = np.zeros(shape = (SPACE,SPACE,1000))
-for img in range(0,1000):
-    noise = np.random.normal(size = (SPACE,SPACE))
+imgArray = np.zeros(shape = (SPACE,SPACE,n[1]))
+for img in range(0,n[1]):
+    noise = np.random.normal(loc = LOC,scale = SCALE,size = (SPACE,SPACE))
     y2n = noise + y2
     imgArray[:,:,img] = y2n
 imgArray = imgArray.mean(axis = 2)
 ax[2][2].imshow(imgArray,cmap = 'magma')
-ax[2][2].set_title('n = 1000')
+ax[2][2].set_title(f'n = {n[1]}')
 
 #show fig
 fig.tight_layout()

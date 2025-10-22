@@ -44,8 +44,8 @@ for i in range(0,RAND_COUNT):
 ax[1].scatter(randCoords[:,0],randCoords[:,1],c = randColors,cmap = 'binary')
 
 #scatter interpolate
-INTER_X = 40
-INTER_Y = 30
+INTER_X = 400# * 3
+INTER_Y = 300# * 3
 INTER_SIZE = INTER_X*INTER_Y
 interCoords = np.zeros((INTER_SIZE,2))
 interColors = np.zeros((INTER_SIZE))
@@ -53,17 +53,19 @@ print(INTER_SIZE)
 
 #RAND_COUNT = 4
 for i in range(0,INTER_SIZE):
+    iy = int(i / INTER_X)*SIZE_Y/INTER_Y
+    ix = (i % INTER_X)*SIZE_X/INTER_X
     best_distance = float('inf')
     best_coord = 0
     for j in range(0,RAND_COUNT):
         x = randCoords[j][0]
         y = randCoords[j][1]
-        distance = (x**2 + y**2)**(1/2)
+        distance = ((x-ix)**2 + (y-iy)**2)**(0.5)
         if(best_distance > distance):
             best_distance = distance
             best_coord = j
-    interCoords[i][0] = int(i/INTER_X)#*SIZE_X/INTER_X
-    interCoords[i][1] = (i%INTER_X)#*SIZE_Y/INTER_Y
+    interCoords[i][0] = ix
+    interCoords[i][1] = iy
     #print(interCoords[i])
     interColors[i] = randColors[best_coord]
     #print(best_coord)

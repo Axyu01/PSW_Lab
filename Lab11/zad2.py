@@ -51,7 +51,7 @@ PX = [[-1,0,1,],
       [-1,0,1,]]
 PY = [[-1,-1,-1,],
       [ 0,0,0,],
-      [-1,1,1,]]
+      [1,1,1,]]
 mono_px = ndimage.correlate(mono_gausian,PX)
 mono_py = ndimage.correlate(mono_gausian,PY)
 mono_px[mono_px<0] = 0
@@ -76,9 +76,9 @@ mono_edge_t[mono_edge>=threshold] = 1
 mono_edge_t[mono_edge<threshold] = 0
 
 #filtracja medianowa
-MEDIAN_FILTER = np.ones((21,21))/(21*21)
-mono_m_median = ndimage.correlate(mono_m,MEDIAN_FILTER)
-mono_edge_median = ndimage.correlate(mono_edge,MEDIAN_FILTER)
+#MEDIAN_FILTER = np.ones((21,21))/(21*21)
+mono_m_median = ndimage.median_filter(mono_m,size = 21)
+mono_edge_median = ndimage.median_filter(mono_edge,size = 21)
 
 #progowanie adaptacyjne
 mono_m_ad = adaptive_threshold(mono_m)
